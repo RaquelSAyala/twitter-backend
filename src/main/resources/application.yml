@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: twitter-app
+  datasource:
+    url: jdbc:h2:mem:twitterdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://${AUTH0_DOMAIN:YOUR_DOMAIN}/
+          audience: ${AUTH0_AUDIENCE:YOUR_AUDIENCE}
+
+server:
+  port: 8080
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
