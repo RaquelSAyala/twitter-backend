@@ -1,6 +1,7 @@
 package com.twitter.app.repository;
 
 import com.twitter.app.model.Post;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +9,9 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
+    @EntityGraph(attributePaths = "user")
     List<Post> findAllByOrderByCreatedAtDesc();
+
+    @EntityGraph(attributePaths = "user")
+    List<Post> findAllByStreamIdOrderByCreatedAtDesc(Long streamId);
 }

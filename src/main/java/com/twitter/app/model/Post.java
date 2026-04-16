@@ -1,5 +1,6 @@
 package com.twitter.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +26,16 @@ public class Post {
 
     @Column(nullable = false)
     private String authorId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stream_id")
+    @JsonIgnore
+    private Stream stream;
 
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
